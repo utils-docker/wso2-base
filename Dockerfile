@@ -24,7 +24,8 @@ ENV wso2_component_directory ${wso2_component_directory:-"/opt/wso2/"}
 
 ###
 
-RUN apk --update --no-cache add openssh
+RUN apk --update --no-cache add openssh \
+  && mkdir -p /opt/wso2/
 
 WORKDIR /opt
 
