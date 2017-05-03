@@ -4,15 +4,6 @@ LABEL Description="WSO2 - Base"
 
 ###
 
-ARG wso2_esb_version
-ENV wso2_esb_version ${wso2_esb_version:-"5.0.0"}
-
-ARG wso2_repository_version
-ENV wso2_repository_version ${wso2_repository_version:-"4.4.11"}
-
-ARG wso2_registry_version
-ENV wso2_registry_version ${wso2_registry_version:-"5.4.0"}
-
 ARG wso2_username
 ENV wso2_username ${wso2_username:-"wso2"}
 
