@@ -16,13 +16,14 @@ ENV wso2_component_directory ${wso2_component_directory:-"/opt/wso2/"}
 ###
 
 RUN apk --update --no-cache add openssh \
+  && printf "${wso2_password}\n${wso2_password}" | adduser ${wso2_username} \
+  && echo "${wso2_username} ALL = NOPASSWD: ALL" >> /etc/sudoers \
   && mkdir -p /opt/wso2/
 
 WORKDIR /opt
 
 ## Configure SSH
-RUN printf "${wso2_password}\n${wso2_password}" | adduser ${wso2_username} \
-  && printf "\n\n" | ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key \
+RUN printf "\n\n" | ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key \
   && printf "\n\n" | ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key \
   && printf "\n\n" | ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key \
   && printf "\n\n" | ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key \
